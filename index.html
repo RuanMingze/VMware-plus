@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VMware++ 修改器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 自定义标题栏 -->
+    <div class="title-bar">
+        <div class="title-bar-drag-region"></div>
+        <div class="title-bar-text">VMware++ 修改器</div>
+        <div class="title-bar-controls">
+            <button class="title-bar-button" id="minimize-button">─</button>
+            <button class="title-bar-button" id="maximize-button">□</button>
+            <button class="title-bar-button close-button" id="close-button">✕</button>
+        </div>
+    </div>
+    
+    <!-- 自定义菜单栏 -->
+    <div class="menu-bar">
+        <div class="menu-item" id="file-menu">
+            <span>文件</span>
+            <div class="submenu" id="file-submenu">
+                <div class="submenu-item" id="exit-item">退出</div>
+            </div>
+        </div>
+        <div class="menu-item" id="settings-menu">
+            <span>设置</span>
+            <div class="submenu" id="settings-submenu">
+                <div class="submenu-item" id="customize-theme-item">自定义主题</div>
+            </div>
+        </div>
+        <div class="menu-item" id="help-menu">
+            <span>帮助</span>
+            <div class="submenu" id="help-submenu">
+                <div class="submenu-item" id="about-item">关于</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>VMware++ 修改器</h1>
+            <p>改善 VMware 虚拟机性能和兼容性的工具</p>
+        </header>
+        
+        <main>
+            <section class="directory-section">
+                <label for="vm-dir">虚拟机目录:</label>
+                <div class="input-group">
+                    <input type="text" id="vm-dir" placeholder="请选择包含虚拟机文件的目录">
+                    <button id="browse-btn">浏览...</button>
+                </div>
+            </section>
+            
+            <section class="options-section">
+                <h2>修改选项</h2>
+                <div class="option">
+                    <input type="checkbox" id="smc-option">
+                    <label for="smc-option">为 macOS 虚拟机启用 SMC 仿真 (添加: smc.version = "0")</label>
+                </div>
+                <div class="option">
+                    <input type="checkbox" id="amd-option">
+                    <label for="amd-option">为 macOS 的 AMD CPU 用户添加兼容层</label>
+                </div>
+                <div class="option">
+                    <input type="checkbox" id="suspend-option">
+                    <label for="suspend-option">禁用自动挂起 (添加: suspend.disabled = "TRUE")</label>
+                </div>
+            </section>
+            
+            <section class="actions-section">
+                <button id="apply-btn">应用修改</button>
+                <button id="exit-btn">退出</button>
+            </section>
+            
+            <section class="progress-section hidden">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <p id="status-text">正在处理...</p>
+            </section>
+            
+            <section class="log-section">
+                <h2>操作日志</h2>
+                <div id="log-container">
+                    <pre id="log-content">请选择虚拟机目录并选择修改选项</pre>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- 设置对话框 -->
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>设置</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="setting-group">
+                    <label for="theme-color">主题颜色:</label>
+                    <input type="color" id="theme-color" value="#8e44ad">
+                </div>
+                <div class="setting-group">
+                    <label for="background-color">背景颜色:</label>
+                    <input type="color" id="background-color" value="#8e44ad">
+                </div>
+                <div class="setting-group">
+                    <label for="background-image">背景图片:</label>
+                    <div class="image-setting">
+                        <input type="text" id="background-image-path" placeholder="未选择图片" readonly>
+                        <button id="select-image-btn">选择图片</button>
+                    </div>
+                </div>
+                <div class="setting-group">
+                    <button id="reset-settings-btn">重置为默认设置</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="save-settings-btn">保存</button>
+                <button id="cancel-settings-btn">取消</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="renderer.js"></script>
+</body>
+</html>
